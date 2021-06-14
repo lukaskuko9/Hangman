@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,18 @@ namespace Hangman
     /// </summary>
     public partial class MainWindow : Window
     {
+        public WordModel Word { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
+            Word = new WordModel("random");
+        }
+
+        private void NewWord_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Word.SetNewWord("new word");
         }
     }
 }
