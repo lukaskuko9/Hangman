@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Hangman
 {
@@ -18,8 +19,16 @@ namespace Hangman
 
             for (int i = 0; i < wordStr.Length; i++)
                 Add(new LetterModel(wordStr[i]));
+        }
 
-            this[3].IsShown = true;
+        public void ShowLetter(char letter)
+        {
+            Items.ToList()
+                 .Where(l => l.Letter.ToString().ToUpper().First() == letter.ToString().ToUpper().First())
+                 .ToList()
+                 .ForEach(l => l.IsShown = true);
+
+            OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
         }
     }
 }

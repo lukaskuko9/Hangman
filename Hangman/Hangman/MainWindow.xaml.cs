@@ -34,5 +34,10 @@ namespace Hangman
         {
             Word.SetNewWord("new word");
         }
+
+        private void Keyboard_OnLetterClick(char letter)
+        {
+            Word.ShowLetter(letter);
+        }
     }
 }
