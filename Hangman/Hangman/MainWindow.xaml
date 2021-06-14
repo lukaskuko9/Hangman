@@ -19,9 +19,9 @@
         </DataTemplate>
         <local:LetterTemplateSelector x:Key="letterTemplateSelector" />
     </Window.Resources>
-    <StackPanel>
-        <DockPanel>
-            <Menu Grid.Row="0" DockPanel.Dock="Top">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" VerticalAlignment="Stretch">
+            <Menu Grid.Row="0">
                 <MenuItem Header="_File">
                     <MenuItem Header="_New Word" Click="NewWord_MenuItem_Click" />
                     <Separator />
@@ -31,10 +31,11 @@
             <ListView ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" MinHeight="70">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"></StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"></StackPanel>
                     </ItemsPanelTemplate>
                 </ListView.ItemsPanel>
             </ListView>
-        </DockPanel>
-    </StackPanel>
+        </StackPanel>
+        <local:Keyboard DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Center"></local:Keyboard>
+    </DockPanel>
 </Window>
