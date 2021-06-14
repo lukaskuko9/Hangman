@@ -28,6 +28,10 @@
                     <MenuItem Header="_Exit" />
                 </MenuItem>
             </Menu>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left">Lives:</TextBlock>
+                <TextBlock HorizontalAlignment="Left" Text="{Binding Lives.Value}"/>
+            </StackPanel>
             <ListView ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" MinHeight="70">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -36,6 +40,6 @@
                 </ListView.ItemsPanel>
             </ListView>
         </StackPanel>
-        <local:Keyboard DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Center"></local:Keyboard>
+        <local:Keyboard DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Center" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
     </DockPanel>
 </Window>

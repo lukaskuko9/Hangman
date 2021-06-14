@@ -5,6 +5,10 @@ namespace Hangman
 {
     public class WordModel : ObservableCollection<LetterModel>
     {
+        public delegate void HasGuessed();
+        public event HasGuessed OnCorrectGuess;
+        public event HasGuessed OnIncorrectGuess;
+
         private string wordStr;
         public WordModel(string wordStr)
         {
@@ -23,12 +27,19 @@ namespace Hangman
 
         public void ShowLetter(char letter)
         {
-            Items.ToList()
+            var matchedLetters = Items.ToList()
                  .Where(l => l.Letter.ToString().ToUpper().First() == letter.ToString().ToUpper().First())
-                 .ToList()
-                 .ForEach(l => l.IsShown = true);
+                 .ToList();
 
-            OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+            if (matchedLetters.Count == 0)
+                OnIncorrectGuess?.Invoke();
+            else
+            {
+                matchedLetters.ForEach(l => l.IsShown = true);
+                OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
+                OnCorrectGuess?.Invoke();
+            }
+
         }
     }
 }

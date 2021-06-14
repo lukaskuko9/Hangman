@@ -21,18 +21,73 @@ namespace Hangman
     /// </summary>
     public partial class MainWindow : Window
     {
-        public WordModel Word { get; set; }
+        public delegate void Game();
+        public event Game OnGameStart;
+        public event Game OnGameEnd;
+        public event Game OnGameWin;
+        public event Game OnGameLose;
+
+        public WordModel Word { get; set; } = new WordModel("new word");
+
+        public Observable<int> Lives { get; set; } = new Observable<int>();
+        public Observable<bool> GameBeingPlayed { get; set; } = new Observable<bool>();
+
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            Word = new WordModel("random");
+            Word.OnCorrectGuess += Word_OnCorrectGuess;
+            Word.OnIncorrectGuess += Word_OnIncorrectGuess;
+            OnGameWin += Game_OnGameWin;
+            OnGameLose += Game_OnGameLose;
+            OnGameStart += MainWindow_OnGameStart;
+            OnGameEnd += MainWindow_OnGameEnd;
+            OnGameStart?.Invoke();
+        }
+
+        private void MainWindow_OnGameEnd()
+        {
+            GameBeingPlayed.Value = false;
+        }
+
+        private void MainWindow_OnGameStart()
+        {
+            Lives.Value = 3;
+            GameBeingPlayed.Value = true;
+        }
+
+        private void Word_OnIncorrectGuess()
+        {
+            if (--Lives.Value <= 0)
+                OnGameLose?.Invoke();
+        }
+
+        private void Word_OnCorrectGuess()
+        {
+            bool gameWon = Word.ToList().TrueForAll(l => l.IsShown == true);
+            if (gameWon)
+            {
+                OnGameWin?.Invoke();
+            }
+        }
+
+        private void Game_OnGameLose()
+        {
+            MessageBox.Show("YOU LOST!");
+            OnGameEnd?.Invoke();
+        }
+
+        private void Game_OnGameWin()
+        {
+            MessageBox.Show("YOU WON!");
+            OnGameEnd?.Invoke();
         }
 
         private void NewWord_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             Word.SetNewWord("new word");
+            OnGameStart?.Invoke();
         }
 
         private void Keyboard_OnLetterClick(char letter)
