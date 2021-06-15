@@ -39,6 +39,8 @@ namespace Hangman
         public LetterModel(char letter)
         {
             this.Letter = letter;
+            if (string.IsNullOrWhiteSpace(letter.ToString()))
+                this.IsShown = true;
         }
 
         public override string ToString()
