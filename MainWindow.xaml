@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hangman"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Hangman" Height="450" Width="800">
     <Window.Resources>
         <DataTemplate x:Key="ShownLetterDataTemplate">
             <StackPanel>
@@ -26,8 +26,9 @@
                     <MenuItem Header="_File">
                         <MenuItem Header="_New Word" Click="NewWord_MenuItem_Click" />
                         <Separator />
-                        <MenuItem Header="_Exit" />
+                        <MenuItem Header="_Exit" Click="Exit_MenuItem_Click" />
                     </MenuItem>
+                    <MenuItem Header="_About" Click="About_MenuItem_Click"/>
                 </Menu>
                 <ListView ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" IsEnabled="False" VerticalAlignment="Stretch">
                     <ListView.ItemsPanel>
@@ -37,9 +38,12 @@
                     </ListView.ItemsPanel>
                 </ListView>
             </StackPanel>
-            <Button DockPanel.Dock="Bottom">qwe</Button>
+            <StackPanel>
+                <Image x:Name="HangmanImg" Source="{Binding HangmanImgPath}" Stretch="None"/>
+            </StackPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+            <TextBlock HorizontalAlignment="Center" Text="{Binding Word.WordStr}" FontSize="18" FontWeight="Bold" Visibility="{Binding RealWordVisibility.Value}"/>
             <local:Keyboard DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Bottom" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold">Lives:</TextBlock>

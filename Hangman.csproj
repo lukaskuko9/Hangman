@@ -4,6 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <StartupObject>Hangman.App</StartupObject>
+    <Win32Resource></Win32Resource>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\1.png" />
+  </ItemGroup>
 
 </Project>

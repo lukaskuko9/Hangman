@@ -1,10 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Hangman
 {
     public class Observable<T> : INotifyPropertyChanged
     {
+        private List<string> _toNotify = new List<string>();
+
         private T _value;
         public T Value 
         {
@@ -13,6 +17,9 @@ namespace Hangman
             {
                 _value = value;
                 OnPropertyChanged();
+                _toNotify.ForEach(n =>
+                    OnPropertyChanged(n)
+                );
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -24,6 +31,11 @@ namespace Hangman
         public override string ToString()
         {
             return Value.ToString();
+        }
+
+        public void AddNotifyOnChange(string name)
+        {
+            _toNotify.Add(name);
         }
     }
 }

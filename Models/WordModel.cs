@@ -9,17 +9,17 @@ namespace Hangman
         public event HasGuessed OnCorrectGuess;
         public event HasGuessed OnIncorrectGuess;
 
-        private string wordStr;
+        public string WordStr { get; private set; }
         public WordModel(string wordStr)
         {
-            this.wordStr = wordStr;
-            SetNewWord(this.wordStr);
+            this.WordStr = wordStr;
+            SetNewWord(this.WordStr);
         }
 
         public void SetNewWord(string wordStr)
         {
             this.Clear();
-            this.wordStr = wordStr;
+            this.WordStr = wordStr;
 
             for (int i = 0; i < wordStr.Length; i++)
                 Add(new LetterModel(wordStr[i]));
