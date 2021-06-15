@@ -43,8 +43,8 @@
             </StackPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-            <TextBlock HorizontalAlignment="Center" Text="{Binding Word.WordStr}" FontSize="18" FontWeight="Bold" Visibility="{Binding RealWordVisibility.Value}"/>
-            <local:Keyboard DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Bottom" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
+            <TextBlock HorizontalAlignment="Center" Text="{Binding Word.WordStr.Value}" FontSize="18" FontWeight="Bold" Visibility="{Binding RealWordVisibility.Value}"/>
+            <local:Keyboard x:Name="KeyboardControl" DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Bottom" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
                 <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold">Lives:</TextBlock>
                 <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="{Binding Lives.Value}"/>

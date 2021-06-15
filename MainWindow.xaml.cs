@@ -57,16 +57,13 @@ namespace Hangman
 
             OnGameStart?.Invoke();
 
-            this.KeyDown += MainWindow_KeyDown;
+            KeyDown += MainWindow_KeyDown;
         }
 
         private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            var a = e.Key.ToString();
-            if (a.Length == 1)
-            {
-                Keyboard_OnLetterClick(a[0]);
-            }
+            if (e.Key.ToString().Length == 1)
+                KeyboardControl.PressLetter(e.Key.ToString()[0]);
         }
 
         private string GetRandomWord()
@@ -127,9 +124,9 @@ namespace Hangman
             OnGameEnd?.Invoke();
         }
 
-        private void Keyboard_OnLetterClick(char letter)
+        private void Keyboard_OnLetterClick(LetterControl letterControl)
         {
-            Word.ShowLetter(letter);
+            Word.ShowLetter(letterControl.Letter);
         }
 
         private void NewWord_MenuItem_Click(object sender, RoutedEventArgs e)
