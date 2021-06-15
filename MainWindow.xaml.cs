@@ -56,6 +56,17 @@ namespace Hangman
             OnGameEnd += MainWindow_OnGameEnd;
 
             OnGameStart?.Invoke();
+
+            this.KeyDown += MainWindow_KeyDown;
+        }
+
+        private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            var a = e.Key.ToString();
+            if (a.Length == 1)
+            {
+                Keyboard_OnLetterClick(a[0]);
+            }
         }
 
         private string GetRandomWord()
