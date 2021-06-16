@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,8 +19,9 @@ namespace Hangman
     /// </summary>
     public partial class Keyboard : UserControl
     {
-        public delegate void LetterClicked(char letter);
+        public delegate void LetterClicked(LetterControl letterConrol);
         public event LetterClicked OnLetterClick;
+        public List<LetterControl> Letters { get; set; }
 
         public static DependencyProperty LetterMinWidthProperty = DependencyProperty.Register(nameof(LetterMinWidth), typeof(int), typeof(LetterControl));
         public int LetterMinWidth
@@ -31,11 +33,48 @@ namespace Hangman
         public Keyboard()
         {
             InitializeComponent();
+            IsEnabledChanged += Keyboard_IsEnabledChanged;
         }
 
-        private void LetterControl_OnLetterClick(char letter)
+        private void Keyboard_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            OnLetterClick?.Invoke(letter);
+            Letters.ForEach(l => l.IsEnabled = (bool)(e.NewValue));
+        }
+
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            Letters = FindVisualChildren<LetterControl>(this).ToList();
+        }
+
+        public IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in FindVisualChildren<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+        public void PressLetter(char letter)
+        {
+            Letters.First(l => l.Letter == letter).PressLetter();
+        }
+
+        private void LetterControl_OnLetterClick(LetterControl letterControl)
+        {
+            OnLetterClick?.Invoke(letterControl);
         }
     }
 }

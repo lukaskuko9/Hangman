@@ -18,7 +18,7 @@ namespace Hangman
     /// </summary>
     public partial class LetterControl : UserControl
     {
-        public delegate void LetterClicked(char letter);
+        public delegate void LetterClicked(LetterControl LetterControl);
         public event LetterClicked OnLetterClick;
 
         public static DependencyProperty LetterProperty = DependencyProperty.Register(nameof(Letter), typeof(char), typeof(LetterControl));
@@ -32,11 +32,22 @@ namespace Hangman
         {
             InitializeComponent();
             DataContext = this;
+            OnLetterClick += DisableLetter_OnLetterClick;
+        }
+
+        private void DisableLetter_OnLetterClick(LetterControl LetterControl)
+        {
+            this.IsEnabled = false;
+        }
+
+        public void PressLetter()
+        {
+            OnLetterClick?.Invoke(this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OnLetterClick?.Invoke(Letter);
+            OnLetterClick?.Invoke(this);
         }
     }
 }
