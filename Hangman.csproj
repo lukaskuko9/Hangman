@@ -10,10 +10,39 @@
 
   <ItemGroup>
     <None Remove="Assets\1.png" />
+    <None Remove="Assets\Images\2.png" />
+    <None Remove="Assets\Images\3.png" />
+    <None Remove="Assets\Images\4.png" />
+    <None Remove="Assets\Images\5.png" />
+    <None Remove="Assets\Images\6.png" />
+    <None Remove="Assets\Images\7.png" />
+    <None Remove="Assets\words.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\Images\1.png" />
+    <Resource Include="Assets\Images\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <EmbeddedResource Include="Assets\words.txt">
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -33,18 +34,32 @@ namespace Hangman
         };
 
 
-        public string HangmanImgPath => $"\\Assets\\Images\\{MaxLives - Lives.Value +1}.png";
+        public string HangmanImgPath => $"pack://application:,,,/Assets/Images/{MaxLives - Lives.Value +1}.png";
 
         public Observable<ImageSource> ImageSource { get; set; } = new Observable<ImageSource>();
+
+        public string GetEmbeddedResource(string namespacename, string filename)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = namespacename + "." + filename;
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                string result = reader.ReadToEnd();
+                return result;
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
+            BitmapImage bmi = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/1.png"));
 
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
 
-            AvailableWords = File.ReadAllLines(projectDirectory + "\\Assets\\words.txt").ToList();
+            AvailableWords = GetEmbeddedResource("Hangman", "Assets.words.txt").Split('\n').ToList();
 
             string wordStr = GetRandomWord();
             Word = new WordModel(wordStr);
@@ -62,13 +77,13 @@ namespace Hangman
 
         private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key.ToString().Length == 1)
+            if (e.Key.ToString().Length == 1) //only keys from A-Z have length one when converted to string :)
                 KeyboardControl.PressLetter(e.Key.ToString()[0]);
         }
 
         private string GetRandomWord()
         {
-            int index = new Random().Next(0, AvailableWords.Count-1);
+            int index = new Random().Next(0, AvailableWords.Count);
             return AvailableWords[index];
         }
 
@@ -88,9 +103,7 @@ namespace Hangman
 
         private void UpdateHangmanImg()
         {
-            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-            var uri = new Uri(projectDirectory + HangmanImgPath);
-            HangmanImg.Source = new BitmapImage(uri);
+            HangmanImg.Source = new BitmapImage(new Uri(HangmanImgPath));
         }
 
         private void Word_OnIncorrectGuess()
