@@ -34,6 +34,13 @@ namespace Hangman
         {
             InitializeComponent();
             IsEnabledChanged += Keyboard_IsEnabledChanged;
+            SizeChanged += Keyboard_SizeChanged;
+        }
+
+        private void Keyboard_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.SecondRow.Margin = new Thickness((Letters[0].ActualWidth+5)/2, 0, (Letters[0].ActualWidth + 5) / 2, 0);
+            this.ThirdRow.Margin = new Thickness((Letters[0].ActualWidth+5)/2, 0, (Letters[0].ActualWidth + 5) / 2, 0);
         }
 
         private void Keyboard_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)

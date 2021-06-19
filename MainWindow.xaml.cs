@@ -89,6 +89,7 @@ namespace Hangman
 
         private void MainWindow_OnGameEnd()
         {
+            Word.RevealWord();
             RealWordVisibility.Value = Visibility.Visible;
             GameBeingPlayed.Value = false;
         }

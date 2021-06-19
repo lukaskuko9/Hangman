@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hangman"
         mc:Ignorable="d"
-        Title="Hangman" Height="450" Width="800">
+        Title="Hangman" Height="450" Width="800" MinWidth="400" MinHeight="400">
     <Window.Resources>
         <DataTemplate x:Key="ShownLetterDataTemplate">
             <StackPanel>
@@ -19,37 +19,39 @@
         </DataTemplate>
         <local:LetterTemplateSelector x:Key="letterTemplateSelector" />
     </Window.Resources>
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Top" VerticalAlignment="Stretch">
-            <StackPanel Orientation="Vertical" DockPanel.Dock="Top">
-                <Menu >
-                    <MenuItem Header="_File">
-                        <MenuItem Header="_New Word" Click="NewWord_MenuItem_Click" />
-                        <Separator />
-                        <MenuItem Header="_Exit" Click="Exit_MenuItem_Click" />
-                    </MenuItem>
-                    <MenuItem Header="_About" Click="About_MenuItem_Click"/>
-                </Menu>
-                <ListView ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" IsEnabled="False" VerticalAlignment="Stretch">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
-            </StackPanel>
-            <StackPanel>
-                <Image x:Name="HangmanImg" Source="{Binding HangmanImgPath}" Stretch="None"/>
-            </StackPanel>
-        </DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
-            <TextBlock HorizontalAlignment="Center" Text="{Binding Word.WordStr.Value}" FontSize="18" FontWeight="Bold" Visibility="{Binding RealWordVisibility.Value}"/>
-            <local:Keyboard x:Name="KeyboardControl" DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" LetterMinWidth="50" VerticalAlignment="Bottom" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold">Lives:</TextBlock>
-                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="{Binding Lives.Value}"/>
-            </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition MaxHeight="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.6*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Word" Click="NewWord_MenuItem_Click" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="Exit_MenuItem_Click" />
+            </MenuItem>
+            <MenuItem Header="_About" Click="About_MenuItem_Click"/>
+        </Menu>
+        <ListView Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" IsEnabled="False">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        <Image Grid.Row="2" Grid.ColumnSpan="3" x:Name="HangmanImg" Source="pack://application:,,,/Assets/Images/1.png" Stretch="Uniform"/>
+        <local:Keyboard Grid.Row="3" Grid.Column="1" x:Name="KeyboardControl" DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
+        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="3">
+            <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold">Lives:</TextBlock>
+            <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="{Binding Lives.Value}"/>
         </StackPanel>
-
-    </DockPanel>
+    </Grid>
 </Window>

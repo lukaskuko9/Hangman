@@ -6,5 +6,5 @@
              xmlns:local="clr-namespace:Hangman"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Button Content="{Binding Letter}" MinHeight="40" MinWidth="40" Click="Button_Click"></Button>
+    <Button Content="{Binding Letter}" Click="Button_Click"></Button>
 </UserControl>

@@ -12,8 +12,7 @@ namespace Hangman
         public Observable<string> WordStr { get; private set; } = new Observable<string>();
         public WordModel(string wordStr)
         {
-            this.WordStr.Value = wordStr;
-            SetNewWord(this.WordStr.Value);
+            SetNewWord(wordStr);
         }
 
         public void SetNewWord(string wordStr)
@@ -23,6 +22,13 @@ namespace Hangman
 
             for (int i = 0; i < wordStr.Length; i++)
                 Add(new LetterModel(wordStr[i]));
+        }
+
+        public void RevealWord()
+        {
+            Items.ToList()
+                .ForEach(l => l.IsShown = true);
+            OnCollectionChanged(new System.Collections.Specialized.NotifyCollectionChangedEventArgs(System.Collections.Specialized.NotifyCollectionChangedAction.Reset));
         }
 
         public void ShowLetter(char letter)

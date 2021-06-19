@@ -5,39 +5,73 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hangman"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,1">
-            <local:LetterControl Letter="Q" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="W" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="E" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="R" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="T" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="Y" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="U" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="I" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="O" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="P" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,1">
-            <local:LetterControl Letter="A" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="S" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="D" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="F" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="G" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="H" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="J" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="K" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="L" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,1">
-            <local:LetterControl Letter="Z" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="X" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="C" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="V" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="B" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="N" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-            <local:LetterControl Letter="M" OnLetterClick="LetterControl_OnLetterClick" MinWidth="{Binding LetterMinWidth}" Margin="1,0"></local:LetterControl>
-        </StackPanel>
-    </StackPanel>
+             d:DesignHeight="350" d:DesignWidth="800">
+    <UniformGrid Rows="3">
+        <Grid x:Name="FirstRow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>                
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <local:LetterControl Padding="5" Letter="Q" Grid.Column="0" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="W" Grid.Column="1" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="E" Grid.Column="2" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="R" Grid.Column="3" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="T" Grid.Column="4" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="Y" Grid.Column="5" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="U" Grid.Column="6" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="I" Grid.Column="7" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="O" Grid.Column="8" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="P" Grid.Column="9" OnLetterClick="LetterControl_OnLetterClick" />
+        </Grid>
+        <Grid x:Name="SecondRow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <local:LetterControl Padding="5" Letter="A" Grid.Column="0" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="S" Grid.Column="1" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="D" Grid.Column="2" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="F" Grid.Column="3" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="G" Grid.Column="4" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="H" Grid.Column="5" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="J" Grid.Column="6" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="K" Grid.Column="7" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="L" Grid.Column="8" OnLetterClick="LetterControl_OnLetterClick" />
+        </Grid>
+        <Grid x:Name="ThirdRow">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <local:LetterControl Padding="5" Letter="Z" Grid.Column="1" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="X" Grid.Column="2" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="C" Grid.Column="3" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="V" Grid.Column="4" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="B" Grid.Column="5" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="N" Grid.Column="6" OnLetterClick="LetterControl_OnLetterClick" />
+            <local:LetterControl Padding="5" Letter="M" Grid.Column="7" OnLetterClick="LetterControl_OnLetterClick" />
+        </Grid>
+    </UniformGrid>
 </UserControl>
