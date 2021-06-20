@@ -21,7 +21,7 @@ namespace Hangman
             this.WordStr.Value = wordStr;
 
             for (int i = 0; i < wordStr.Length; i++)
-                Add(new LetterModel(wordStr[i]));
+                Add(new LetterModel(wordStr.ToUpper()[i]));
         }
 
         public void RevealWord()

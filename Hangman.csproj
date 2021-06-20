@@ -16,6 +16,11 @@
     <None Remove="Assets\Images\5.png" />
     <None Remove="Assets\Images\6.png" />
     <None Remove="Assets\Images\7.png" />
+    <None Remove="Assets\Images\background.jpg" />
+    <None Remove="Assets\Images\bg.jpg" />
+    <None Remove="Assets\Images\hangmanBg.png" />
+    <None Remove="Assets\Images\keyboard_button.png" />
+    <None Remove="Assets\Images\woodPlank.png" />
     <None Remove="Assets\words.txt" />
   </ItemGroup>
 
@@ -39,6 +44,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\hangmanBg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\bg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\keyboard_button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\woodPlank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <EmbeddedResource Include="Assets\words.txt">

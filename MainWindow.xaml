@@ -5,19 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hangman"
         mc:Ignorable="d"
-        Title="Hangman" Height="450" Width="800" MinWidth="400" MinHeight="400">
+        Title="Hangman" Height="450" Width="800" MinWidth="500" MinHeight="450">
     <Window.Resources>
         <DataTemplate x:Key="ShownLetterDataTemplate">
-            <StackPanel>
-                <TextBlock Text="{Binding Letter}" FontWeight="Bold" />
+            <StackPanel Margin="4">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="Wheat" Opacity="0.7"/>
+                </StackPanel.Background>
+                <TextBlock Text="{Binding Letter}" FontWeight="Bold" FontSize="20" Foreground="Black"/>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="HiddenLetterDataTemplate">
-            <StackPanel>
-                <TextBlock Text="{Binding HiddenChar}"/>
+            <StackPanel Margin="4">
+                <StackPanel.Background>
+                    <SolidColorBrush Color="Wheat" Opacity="0.7"/>
+                </StackPanel.Background>
+                <TextBlock Text="{Binding HiddenChar}" FontWeight="Black" FontSize="20" FontFamily="Verdana" Foreground="Black"/>
             </StackPanel>
         </DataTemplate>
         <local:LetterTemplateSelector x:Key="letterTemplateSelector" />
+        <Style x:Key="DarkRoomListViewStyle" TargetType="{x:Type ListView}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListView">
+                        <Border Name="Border">
+                            <Border.Background>
+                                <ImageBrush ImageSource="pack://application:,,,/Assets/Images/woodPlank.png" Stretch="None"/>
+                            </Border.Background>
+                            <ItemsPresenter />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,6 +59,9 @@
             <RowDefinition Height="0.6*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/Assets/Images/bg.jpg"></ImageBrush>
+        </Grid.Background>
         <Menu Grid.Row="0" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
                 <MenuItem Header="_New Word" Click="NewWord_MenuItem_Click" />
@@ -40,14 +70,20 @@
             </MenuItem>
             <MenuItem Header="_About" Click="About_MenuItem_Click"/>
         </Menu>
-        <ListView Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" IsEnabled="False">
+        <ListView Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding Word}" ItemTemplateSelector="{StaticResource letterTemplateSelector}" IsEnabled="False"  Style="{StaticResource DarkRoomListViewStyle}">
+            <ListView.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Assets/Images/woodPlank.png" Stretch="UniformToFill"/>
+            </ListView.Background>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <Image Grid.Row="2" Grid.ColumnSpan="3" x:Name="HangmanImg" Source="pack://application:,,,/Assets/Images/1.png" Stretch="Uniform"/>
+        <Grid Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+            <Image x:Name="HangmanBg" Source="pack://application:,,,/Assets/Images/hangmanBg.png" Stretch="Uniform" HorizontalAlignment="Center"/>
+            <Image x:Name="HangmanImg" Source="pack://application:,,,/Assets/Images/1.png" Stretch="Uniform" HorizontalAlignment="Center"/>
+        </Grid>
         <local:Keyboard Grid.Row="3" Grid.Column="1" x:Name="KeyboardControl" DockPanel.Dock="Bottom" OnLetterClick="Keyboard_OnLetterClick" IsEnabled="{Binding GameBeingPlayed.Value}"></local:Keyboard>
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="3">
             <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold">Lives:</TextBlock>

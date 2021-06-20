@@ -25,7 +25,6 @@ namespace Hangman
         public WordModel Word { get; set; }
         public Observable<int> Lives { get; set; } = new Observable<int>();
 
-
         public List<string> AvailableWords;
         public Observable<bool> GameBeingPlayed { get; set; } = new Observable<bool>();
         public Observable<Visibility> RealWordVisibility { get; set; } = new Observable<Visibility>()
@@ -55,10 +54,7 @@ namespace Hangman
         {
             InitializeComponent();
             DataContext = this;
-            BitmapImage bmi = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/1.png"));
-
-            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
+            HangmanBg.Source = new BitmapImage(new Uri("pack://application:,,,/Assets/Images/hangmanBg.png"));
             AvailableWords = GetEmbeddedResource("Hangman", "Assets.words.txt").Split('\n').ToList();
 
             string wordStr = GetRandomWord();
@@ -73,6 +69,7 @@ namespace Hangman
             OnGameStart?.Invoke();
 
             KeyDown += MainWindow_KeyDown;
+            
         }
 
         private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

@@ -6,5 +6,33 @@
              xmlns:local="clr-namespace:Hangman"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Button Content="{Binding Letter}" Click="Button_Click"></Button>
+    <Button Content="{Binding Letter}" Click="Button_Click" BorderThickness="0" FontSize="18" MinWidth="25" MinHeight="25">
+        <Button.Style>
+            <Style TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Border" CornerRadius="2" BorderThickness="2" Background="PapayaWhip" BorderBrush="DarkGray">
+                                <ContentPresenter  Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Border" Property="Background" Value="#AAF5D5C5" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="DarkGray" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="WhiteSmoke" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="DarkGray" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter TargetName="Border" Property="Background" Value="WhiteSmoke" />
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="DarkGray" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Button.Style>
+    </Button>
 </UserControl>
